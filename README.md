@@ -1,1 +1,1 @@
-# Softlab-Project
+# Canteen Automation and ordering System
