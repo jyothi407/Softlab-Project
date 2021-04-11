@@ -10,4 +10,5 @@ urlpatterns = [
     path('linechart',views.line,name='line'),
     path('check',views.check,name='check'),
     path('confirm',views.confirm,name='confirm'),
+    path('incentives',views.incentives,name='incentive'),
 ]

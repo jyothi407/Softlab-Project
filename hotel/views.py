@@ -122,3 +122,30 @@ def confirm(request):
         j.status="C"
         j.save()
     return redirect('base')
+
+def incentives(request):
+    res = []
+    count = {}
+    today = date.today()
+    m = today.strftime("%m")
+    queryset = History.objects.order_by('-order_date')
+    for h in queryset:
+        us = h.customer
+        price = h.totalcost
+        dt = h.order_date
+        dtm = dt.strftime("%m")
+        if(dtm != m):
+            break
+        if us not in res:
+            res.append(us)
+        if us not in count:
+            count[us] = 0
+        var = count[us]
+        count[us] = var + price
+
+    r = dict(sorted(count.items(),key=lambda item: item[1],reverse = True))
+    nm = list(r.keys())
+    nm = nm[:5]
+    cp = list(r.values())
+    cp = cp[:5]
+    return render(request, 'hotel/incentives.html',{'names':nm,'costspent':cp})

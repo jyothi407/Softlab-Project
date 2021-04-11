@@ -23,11 +23,10 @@ td {
     <th>Quantity</th>
     <th>Cost</th>
   </tr>
-{{% for j in h%}
+{{% for j,k in names,costspent%}
 <tr>
-<td>{{j.item}}</td>
-<td>{{j.quantity}}</td>
-<td>{{j.totalcost}}</td>
+<td>{{j}}</td>
+<td>{{k}}</td>
 </tr>
 {% endfor %}
 </table>
