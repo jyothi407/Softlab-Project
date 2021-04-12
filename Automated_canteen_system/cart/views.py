@@ -5,6 +5,7 @@ from fooditems.models import Fooditem
 from .models import Cart
 from django.contrib.auth.decorators import login_required
 # Created views for cart
+#this is the carts views.py
 @login_required(login_url='login')
 def cart(request):
     if request.method == "POST":
