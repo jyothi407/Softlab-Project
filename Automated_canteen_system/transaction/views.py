@@ -9,12 +9,15 @@ from django.core.mail import EmailMultiAlternatives, send_mail
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+@login_required(login_url='login')
 def money(request):
     p = request.POST['cs']
     if int(p) == 0:
         return redirect('home')
     return render(request,'transaction/pay.html',{'p':p})
+@login_required(login_url='login')
 def res(request):
     f = Cart.objects.filter(customer=request.user)
     print(f)
@@ -44,3 +47,7 @@ def res(request):
     email.attach_alternative(html_content,"text/html")
     email.send()
     return redirect('home')
+@login_required(login_url='login')
+def check(request):
+    t = Transactions.objects.filter(customer=request.user)
+    return render(request,'transaction/payment.html',{'t':t})
